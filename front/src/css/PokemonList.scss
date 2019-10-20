@@ -1,0 +1,43 @@
+.pokemonList {
+    max-width: 490px;
+    
+    &--singleCafle {
+        border-radius: 20px;
+        margin-right: 20px;
+        margin-top: 20px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0,0,0,.125);
+        height: 124px;
+    }
+    &--boxPokemon{
+        border-radius: 100px 20px 20px 100px;
+        width: 200px;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        position: relative;
+        left: 57%;
+    }
+    &--name {
+        text-transform: capitalize;
+        position: relative;
+        left: 76px;
+        bottom: 134px;
+    }
+    &--index {
+        position: relative;
+        bottom: 110px;
+        left: 50px;
+    }
+   
+    &--imgPosition {
+        width: 120px;
+        float: right;
+    }
+
+}
