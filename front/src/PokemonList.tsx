@@ -8,6 +8,7 @@ import Pagination from 'react-js-pagination';
 type PokemonListS= {
     pokemonsList: Array<PokemonListModel>,
     activePage: number,
+    filterName: string
 }
 
 
@@ -18,10 +19,11 @@ export class PokemonList extends React.Component<any,PokemonListS> {
         this.state = {
             pokemonsList: [],
             activePage: 0,
+            filterName: ''
         }
         this.getListPokemons = this.getListPokemons.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
-     
+        this.searchByName = this.searchByName.bind(this);
     }
 
    
@@ -42,14 +44,26 @@ export class PokemonList extends React.Component<any,PokemonListS> {
         this.setState({activePage: pageNumber-1});
         this.getListPokemons(pageNumber-1)
       }
-
+    
+    public searchByName(e:any){
+        this.setState({
+            filterName: e.target.value
+        })
+       
+    }  
 
     render(){
+        // let filtredPokemonName = this.state.pokemonsList.filter(
+        //     (pokemons) => {
+        //         return pokemons.name.indexOf(this.state.filterName) !== -1;
+        //     }
+        // )
         return(
             <>
             <div className="pokemonList"> 
+                <input type="text" name="searchName" className="pokemonList--searchName" value={this.state.filterName} onChange={this.searchByName} placeholder="Search name..." />
             { 
-                this.state.pokemonsList.map((pokemons:any, key) =>{
+                 this.state.pokemonsList.map((pokemons:any, key) =>{
                     const index = pokemons.url.split('/')[pokemons.url.split('/').length - 2]
                     const imgForPokemons = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${index}.png?raw=true`;
                 return( 
@@ -61,6 +75,8 @@ export class PokemonList extends React.Component<any,PokemonListS> {
                         </div>
                         <div className="pokemonList--index">{index}</div>      
                         <NavLink className="pokemonList--name" to={`chosen/${index}`}>{pokemons.name}</NavLink>
+                        <input type="checkbox" id="check1" className="dwcheckbox"/>
+                        <label ></label>
                     </div>
                 ) 
                 })                

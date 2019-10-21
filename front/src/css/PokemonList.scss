@@ -1,5 +1,9 @@
 .pokemonList {
     max-width: 490px;
+    background-color: red;
+    position: relative;
+    padding-left: 15px;
+
     
     &--singleCafle {
         border-radius: 20px;
@@ -15,13 +19,26 @@
         border: 1px solid rgba(0,0,0,.125);
         height: 124px;
     }
+    &--searchName{
+        position: relative;
+        width: 80%;
+        border-radius: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 10px;
+        padding-left: 10px;
+    }
     &--boxPokemon{
-        border-radius: 100px 20px 20px 100px;
-        width: 200px;
+        border-radius: 7px 20px 20px 12px;
+        width: 144px;
         background-clip: border-box;
         border: 1px solid rgba(0, 0, 0, 0.15);
         position: relative;
-        left: 57%;
+        left: 70%;
+        height: 110px;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+        border-top-color: transparent;
     }
     &--name {
         text-transform: capitalize;

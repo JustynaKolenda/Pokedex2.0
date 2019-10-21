@@ -4,8 +4,8 @@ export type PokemonListModel= {
     url: string
 }
 
-export type TypePokemon = {
-    types: Array<any>
+export type PokemonName= {
+    name: string
 }
 
 export type DetailsPokemon= {
