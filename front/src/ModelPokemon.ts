@@ -19,3 +19,17 @@ export type DetailsPokemon= {
         abilities: Array<any>,
         evs: string
 }
+
+export type PokemonSpecies= {
+    color: {
+        name: string
+    },
+    flavor_text_entries: Array<any>,
+    name : string
+}
+
+export type PokemonEvolve= {
+    evolves_to : Array<any>
+}
+
+ 

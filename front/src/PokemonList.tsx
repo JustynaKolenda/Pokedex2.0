@@ -27,8 +27,8 @@ export class PokemonList extends React.Component<any,PokemonListS> {
     }
 
    
-    public getListPokemons(pageNumber:number){
-        getListPokemonsConector(pageNumber).then(resp => {
+    public getListPokemons(pageNumber:number,name:string){
+        getListPokemonsConector(pageNumber, name).then(resp => {
             this.setState({
                 pokemonsList: resp.results            
             })
@@ -37,31 +37,26 @@ export class PokemonList extends React.Component<any,PokemonListS> {
     }
 
     public componentDidMount(){
-        this.getListPokemons(this.state.activePage);
+        this.getListPokemons(this.state.activePage,this.state.filterName);
     }
     
     public handlePageChange(pageNumber:number) {
         this.setState({activePage: pageNumber-1});
-        this.getListPokemons(pageNumber-1)
+        this.getListPokemons(pageNumber-1,this.state.filterName)
       }
     
     public searchByName(e:any){
         this.setState({
             filterName: e.target.value
         })
-       
+       this.getListPokemons(this.state.activePage,e.target.value)
     }  
 
     render(){
-        // let filtredPokemonName = this.state.pokemonsList.filter(
-        //     (pokemons) => {
-        //         return pokemons.name.indexOf(this.state.filterName) !== -1;
-        //     }
-        // )
         return(
             <>
             <div className="pokemonList"> 
-                <input type="text" name="searchName" className="pokemonList--searchName" value={this.state.filterName} onChange={this.searchByName} placeholder="Search name..." />
+                {/* <input type="text" name="searchName" className="pokemonList--searchName" value={this.state.filterName} onChange={this.searchByName} placeholder="Search name..." /> */}
             { 
                  this.state.pokemonsList.map((pokemons:any, key) =>{
                     const index = pokemons.url.split('/')[pokemons.url.split('/').length - 2]
@@ -73,10 +68,14 @@ export class PokemonList extends React.Component<any,PokemonListS> {
                                 <img className="pokemonList--imgPosition" src={imgForPokemons} alt=""/>
                             </div> 
                         </div>
-                        <div className="pokemonList--index">{index}</div>      
-                        <NavLink className="pokemonList--name" to={`chosen/${index}`}>{pokemons.name}</NavLink>
-                        <input type="checkbox" id="check1" className="dwcheckbox"/>
-                        <label ></label>
+                        <div className="pokemonList--boxIndNam">
+                            <div className="pokemonList--index">{index}     
+                            {/* <label htmlFor="check"></label>
+                            <input type="checkbox" id="check" className="pokemonList--starCheckbox"/> */}
+                            <NavLink className="pokemonList--name" to={`chosen/${index}`}>{pokemons.name}</NavLink>
+                            </div> 
+                        </div>
+                    
                     </div>
                 ) 
                 })                

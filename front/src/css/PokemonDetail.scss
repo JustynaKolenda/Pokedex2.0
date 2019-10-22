@@ -1,0 +1,128 @@
+.pokemonDetail {
+    position: relative;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-transform: capitalize;
+    max-height: 150px;
+    min-height: 100px;
+
+    &--all {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 490px;
+        justify-content: center;
+    }
+    &--imgPokemon {
+        min-width: 200px;
+        float: right;
+        position: relative;
+        left: 30px;
+        bottom: 50px;
+    }
+
+    &--name {
+        position: relative;
+        margin-left: 20px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    &--index {
+        margin-left: 10px;
+    }
+
+    &--type {
+        font-size: 18px;
+        font-weight: 500;
+        margin-left: 10px;
+        border: solid 1px grey;
+        border-radius: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    &--typeBox {
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 15px;
+        padding-left: 10px;
+    }
+
+    &--titleDetail{
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+    }
+    &--boxDetails {
+        width: 290px;
+    }
+
+    &--details {
+        margin-right: 10px;
+        text-transform: capitalize;
+        margin-top: 18px;
+    }
+
+    &--weight {
+        border: solid 1px grey;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    &--weightTitle {
+        float: left;
+        margin-right: 20px;
+        padding-left: 10px;
+    }
+
+    &--height {
+        border: solid 1px grey;
+        border-radius: 6px;
+        padding: 10px;
+        float: right;
+        top: -14px;
+        margin-left: 14px;
+        position: relative;
+    }
+
+    &--heightTitle {
+        position: relative;
+        float: right;
+    }
+
+    &--titleSpec {
+        float: left;
+        position: relative;
+    }
+    &--marginTop {
+        margin-top: 20px;
+    }
+
+    &--flavour {
+        text-align: center;
+    }
+
+    &--boxFlavor{
+        border: solid 1px grey;
+        border-radius: 10px;
+        margin: 10px;
+    }
+
+    &--abilityBox {
+        display: flex;
+        align-items: center;
+    }
+    
+    &--ability {
+        text-align: center;
+        border: solid 1px grey;
+        border-radius: 10px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        min-width: 100px;
+        max-width: 180px;
+    }
+    &--marginBottom {
+        margin-bottom: 20px;
+    }
+}

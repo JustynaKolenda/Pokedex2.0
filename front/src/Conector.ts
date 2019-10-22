@@ -1,9 +1,6 @@
-export function getListPokemonsConector(pageNumber:number, pokemonName?: string){
+export function getListPokemonsConector(pageNumber:number, name?: string){
         const limit = 20;
         const offset = limit * pageNumber;
-        const name = pokemonName
-        
-   return fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}&filter=${name}`)
+   return fetch(`https://pokeapi.co/api/v2/pokemon/${name}?offset=${offset}&limit=${limit}`)
         .then(resp => resp.json())
 }
-

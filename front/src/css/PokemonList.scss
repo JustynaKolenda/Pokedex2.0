@@ -40,16 +40,18 @@
         border-right-color: transparent;
         border-top-color: transparent;
     }
+
+    &--boxIndNam {
+        position: relative;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-25%, -50%);
+    }
+
     &--name {
         text-transform: capitalize;
-        position: relative;
-        left: 76px;
-        bottom: 134px;
-    }
-    &--index {
-        position: relative;
-        bottom: 110px;
-        left: 50px;
+        padding-left: 10px;
+        color: black;
     }
    
     &--imgPosition {
@@ -57,4 +59,18 @@
         float: right;
     }
 
+    &--starCheckbox {
+        display: none;
+        background-color: grey;
+        // z-index: 9999;
+        +label{
+            background-color: blue;
+            z-index: 9999;
+            width: 40px;
+            height: 40px;
+            background: url("../img/star-empty.png") 0px 0px;
+            display: block;
+            cursor: pointer;
+        }
+    }
 }
