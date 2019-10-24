@@ -1,0 +1,71 @@
+.pokemonList {
+    max-width: 490px;
+    background-image: url("../img/backlist.png");
+    position: relative;
+    padding-left: 15px;
+    padding-top: 20px;
+
+    &--singleCafle {
+        border-radius: 20px;
+        margin-right: 20px;
+        margin-top: 20px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0,0,0,.125);
+        height: 124px;
+    }
+    &--searchName{
+        position: relative;
+        width: 80%;
+        border-radius: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 10px;
+        padding-left: 10px;
+    }
+    &--boxPokemon{
+        border-radius: 7px 20px 20px 12px;
+        width: 144px;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        position: relative;
+        left: 70%;
+        height: 110px;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+        border-top-color: transparent;
+    }
+
+    &--boxIndNam {
+        position: relative;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-25%, -50%);
+    }
+
+    &--name {
+        text-transform: capitalize;
+        padding-left: 10px;
+        color: black;
+    }
+   
+    &--imgPosition {
+        width: 120px;
+        float: right;
+    }
+
+    &--pagination {
+        display: flex;
+        justify-content: center;
+        max-width: 490px;
+        background-image: url("../img/backlist.png");
+        color: white;
+        font-size: 20px;
+        text-decoration-style: none;
+    }
+}
