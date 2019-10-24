@@ -1,12 +1,35 @@
 import * as React from 'react';
-import {DetailsPokemon, PokemonSpecies, PokemonEvolve} from './ModelPokemon';
+import {DetailsPokemon} from './ModelPokemon';
 import {Card, ListGroup} from 'react-bootstrap';
+import Axios from 'axios';
 
 type PokeDetailS= {
     pokemon: DetailsPokemon,
-    pokemonSpecies: PokemonSpecies,
-    pokemonEvolution: PokemonEvolve,
+    themeColor: string,
+    types: Array<any>,
+    description: string,
 }
+const TYPE_COLORS : any = {
+    bug: 'B1C12E',
+    dark: '4F3A2D',
+    dragon: '755EDF',
+    electric: 'FCBC17',
+    fairy: 'F4B1F4',
+    fighting: '823551D',
+    fire: 'E73B0C',
+    flying: 'A3B3F7',
+    ghost: '6060B2',
+    grass: '74C236',
+    ground: 'D3B357',
+    ice: 'A3E7FD',
+    normal: 'C8C4BC',
+    poison: '934594',
+    psychic: 'ED4882',
+    rock: 'B9A156',
+    steel: 'B5B5C3',
+    water: '3295F6'
+}
+
 
 export class PokemonDetail extends React.Component<any,PokeDetailS> {
     constructor(props:any){
@@ -23,21 +46,12 @@ export class PokemonDetail extends React.Component<any,PokeDetailS> {
                 abilities: [],
                 evs: ''
             },
-            pokemonSpecies: {
-                color: {
-                    name: ''
-                },
-                flavor_text_entries: [],
-                name: ''
-            },
-            pokemonEvolution: {
-                evolves_to : []
-            }
+            themeColor: '#EF5350',
+            types: [],
+            description: '',
         }
         this.getDetailPokemon = this.getDetailPokemon.bind(this);
         this.getImagePokemon = this.getImagePokemon.bind(this);
-        this.getColor = this.getColor.bind(this);
-        this.getEvolution = this.getEvolution.bind(this);
     }
 
     public getDetailPokemon(){
@@ -47,28 +61,6 @@ export class PokemonDetail extends React.Component<any,PokeDetailS> {
                 this.setState({
                     pokemon: resp
                 })
-            })
-        this.getColor();
-    }
-
-    public getColor(){
-        fetch(`https://pokeapi.co/api/v2/pokemon-species/${this.props.match.params.indexPokemon}`)
-            .then(resp => resp.json())
-            .then(resp => {
-                this.setState({
-                    pokemonSpecies: resp
-                })
-            })
-    }
-
-    public getEvolution(){
-        fetch(`https://pokeapi.co/api/v2/evolution-chain/${this.props.match.params.indexPokemon}`)
-            .then(resp => resp.json())
-            .then(resp => {
-                this.setState({
-                    pokemonEvolution: resp.chain
-                })
-                console.log(resp)
             })
     }
 
@@ -80,32 +72,50 @@ export class PokemonDetail extends React.Component<any,PokeDetailS> {
     }
 
 
-    componentDidMount(){
+    async componentDidMount(){
+        const pokemonSpeciesUrl =`https://pokeapi.co/api/v2/pokemon-species/${this.props.match.params.indexPokemon}`;
         this.getDetailPokemon();
-        this.getEvolution();
+
+        const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${this.props.match.params.indexPokemon}/`;
+        const pokemonRes = await Axios.get(pokemonUrl);
+        
+        await Axios.get(pokemonSpeciesUrl).then((res: any) => {
+                let description = '';
+                res.data.flavor_text_entries.some((flavor: any) => {
+                if (flavor.language.name === 'en') {
+                    description = flavor.flavor_text;
+                    return description;
+                }
+                return description
+                });
+        
+        const types = pokemonRes.data.types.map((type:any) => type.type.name);
+        const themeColor = `${TYPE_COLORS[types[types.length - 1]]}`;
+       
+            this.setState({
+                types,
+                themeColor,
+                description,
+                
+            })
+        
+    })
     }
 
-    public mapdescription(){
-        //     this.state.pokemonSpecies.flavor_text_entries.filter((el:any, key)=>{
-        //     el.language.name === 'en' && el.version.name === "emerald" 
-        // })
-    }
-    
     
     render(){
-        const {pokemon, pokemonSpecies,pokemonEvolution} = this.state
+        const {pokemon, types, description} = this.state
         return(
-            <div className="pokemonDetail--all" style={{backgroundColor:`${pokemonSpecies.color.name}`}}>
+            <div className="pokemonDetail--all">
                 <div className="pokemonDetail">
                     <div className="pokemonDetail--name">{pokemon.name} 
                         <span className="pokemonDetail--index">#{this.props.match.params.indexPokemon}</span>
                     </div>
-                    <img className="pokemonDetail--imgPokemon" src={this.getImagePokemon()} alt=""/>
+                    <img className="pokemonDetail--imgPokemon" src={this.getImagePokemon() || "../img/spinner.gif"} alt=""/>
                     <div className="pokemonDetail--typeBox">
                         {
-                            pokemon.types.map((el:any, key)=>{
-                                return <span className="pokemonDetail--type" key={el.type.name} 
-                                style={{backgroundColor: `#74C236`}}>{el.type.name}</span>
+                            types.map((type:any, key)=>{
+                                return <span className="pokemonDetail--type" key={type} style={{ backgroundColor:`#${(TYPE_COLORS as any)[type]}`}}>{type}</span>
                             })
                         }
                     </div>
@@ -114,11 +124,7 @@ export class PokemonDetail extends React.Component<any,PokeDetailS> {
                     <Card.Header className="pokemonDetail--titleDetail">Gatunek</Card.Header>
                     <ListGroup variant="flush" >
                         <div className="pokemonDetail--boxFlavor">
-                        {
-                            pokemonSpecies.flavor_text_entries.map((el:any, key)=>{
-                            return <div className="pokemonDetail--flavour" key={key} >{(el.language.name === 'en' && el.version.name === "emerald")? el.flavor_text : ""}</div>
-                            })
-                        }
+                            <div className="pokemonDetail--flavour">{description}</div>
                         </div>
                        <div className="pokemonDetail--details" >
                             <span className="pokemonDetail--weight">{pokemon.weight} lbs</span>
@@ -138,7 +144,7 @@ export class PokemonDetail extends React.Component<any,PokeDetailS> {
                     }
                     </ListGroup>
                 </Card>
-                <Card className="pokemonDetail--boxDetails pokemonDetail--marginTop pokemonDetail--marginBottom">
+                <Card className="pokemonDetail--boxDetails pokemonDetail--marginTop pokemonDetail--marginBottom pokemonDetail--cardAbility">
                 <Card.Header className="pokemonDetail--titleDetail">Zdolności</Card.Header>
                     <ListGroup variant="flush" className="pokemonDetail--abilityBox" >
                      {
@@ -148,21 +154,6 @@ export class PokemonDetail extends React.Component<any,PokeDetailS> {
                     }
                     </ListGroup>
                 </Card>
-                <div>
-                <Card className="pokemonDetail--boxDetails pokemonDetail--marginBottom">
-                    <Card.Header className="pokemonDetail--titleDetail">Łańcuch Ewolucji</Card.Header>
-                    {
-                        pokemonEvolution.evolves_to.map((el:any, key)=>{
-                            return ( 
-                                <div>
-                                    <div className="pokemonDetail--ability" key={el.species.name}>{el.species.name}</div>
-                                    <img className="pokemonDetail--imgPokemon" src={this.getImagePokemon()} alt=""/>
-                                </div>
-                            )
-                        })
-                    }
-                </Card>
-                </div>
             </div>
         )
     }

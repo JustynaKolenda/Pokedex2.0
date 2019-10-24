@@ -1,10 +1,10 @@
 .pokemonList {
     max-width: 490px;
-    background-color: red;
+    background-image: url("../img/backlist.png");
     position: relative;
     padding-left: 15px;
+    padding-top: 20px;
 
-    
     &--singleCafle {
         border-radius: 20px;
         margin-right: 20px;
@@ -59,18 +59,13 @@
         float: right;
     }
 
-    &--starCheckbox {
-        display: none;
-        background-color: grey;
-        // z-index: 9999;
-        +label{
-            background-color: blue;
-            z-index: 9999;
-            width: 40px;
-            height: 40px;
-            background: url("../img/star-empty.png") 0px 0px;
-            display: block;
-            cursor: pointer;
-        }
+    &--pagination {
+        display: flex;
+        justify-content: center;
+        max-width: 490px;
+        background-image: url("../img/backlist.png");
+        color: white;
+        font-size: 20px;
+        text-decoration-style: none;
     }
 }

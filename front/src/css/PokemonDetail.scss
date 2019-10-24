@@ -1,16 +1,20 @@
 .pokemonDetail {
+    margin-top: 20px;
     position: relative;
-    border: 1px solid black;
     border-radius: 10px;
     text-transform: capitalize;
     max-height: 150px;
     min-height: 100px;
+    background-color: rgba(128, 128, 128, 0.46)!important;
+   
+    color: white;
 
     &--all {
         display: flex;
         flex-wrap: wrap;
         max-width: 490px;
         justify-content: center;
+        background-image: url("../img/pokeback.jpg")
     }
     &--imgPokemon {
         min-width: 200px;
@@ -55,12 +59,18 @@
     }
     &--boxDetails {
         width: 290px;
+        background-color: rgba(128, 128, 128, 0.46)!important;
+        border: none!important;
+        color: white;
     }
 
     &--details {
         margin-right: 10px;
         text-transform: capitalize;
         margin-top: 18px;
+        background-color: rgba(128, 128, 128, 0.1)!important;
+        border: none!important;
+        color: white;
     }
 
     &--weight {
@@ -93,6 +103,9 @@
     &--titleSpec {
         float: left;
         position: relative;
+        background-color: rgba(128, 128, 128, 0.46)!important;
+        border: none!important;
+        color: white;
     }
     &--marginTop {
         margin-top: 20px;
@@ -115,14 +128,24 @@
     
     &--ability {
         text-align: center;
-        border: solid 1px grey;
         border-radius: 10px;
         padding-bottom: 10px;
         padding-top: 10px;
         min-width: 100px;
         max-width: 180px;
+        padding: 10px;
+        margin-bottom: 10px;
+        text-transform: capitalize;
     }
     &--marginBottom {
         margin-bottom: 20px;
+    }
+
+    &--cardAbility {
+        // background-color: rgba(128, 128, 128, 0.46)!important;
+        // color: white;
+        font-size: 18px;
+        font-weight: 600;
+        // border: none!important;
     }
 }

@@ -28,8 +28,4 @@ export type PokemonSpecies= {
     name : string
 }
 
-export type PokemonEvolve= {
-    evolves_to : Array<any>
-}
-
  
